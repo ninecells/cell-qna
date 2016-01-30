@@ -1,0 +1,15 @@
+{
+  "name": "modernpug/qna",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.5.9",
+    "laravel/socialite": "^2.0",
+    "erusev/parsedown": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "ModernPUG\\Qna\\": ""
+    }
+  },
+  "minimum-stability": "dev"
+}
