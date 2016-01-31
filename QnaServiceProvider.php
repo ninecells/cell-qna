@@ -2,13 +2,44 @@
 
 namespace ModernPUG\Qna;
 
+use App;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
+use NineCells\Auth\AuthServiceProvider;
+
+use ModernPUG\Qna\App\Question;
+use ModernPUG\Qna\App\Answer;
+use ModernPUG\Qna\App\Comment;
+use ModernPUG\Qna\App\Vote;
+use ModernPUG\Qna\Policies\QnaPolicy;
 
 class QnaServiceProvider extends ServiceProvider
 {
-    public function boot()
+    private $policies = [
+        Question::class => QnaPolicy::class,
+        Answer::class => QnaPolicy::class,
+        Comment::class => QnaPolicy::class,
+        Vote::class => QnaPolicy::class,
+    ];
+
+    private function registerPolicies(GateContract $gate)
     {
-        if (! $this->app->routesAreCached()) {
+        $gate->before(function ($user, $ability) {
+            if ($ability === "qna-write") {
+                return $user;
+            }
+        });
+
+        foreach ($this->policies as $key => $value) {
+            $gate->policy($key, $value);
+        }
+    }
+
+    public function boot(GateContract $gate)
+    {
+        $this->registerPolicies($gate);
+
+        if (!$this->app->routesAreCached()) {
             require __DIR__ . '/Http/routes.php';
         }
 
@@ -17,9 +48,14 @@ class QnaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/database/migrations/' => database_path('migrations')
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__ . '/resources/assets' => public_path('vendor/qna'),
+        ], 'public');
     }
 
     public function register()
     {
+        App::register(AuthServiceProvider::class);
     }
 }
