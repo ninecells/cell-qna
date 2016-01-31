@@ -2,8 +2,8 @@
 
 namespace ModernPUG\Qna\Http\Controllers;
 
-use ModernPUG\Qna\App\Question;
-use ModernPUG\Qna\App\Tag;
+use ModernPUG\Qna\Models\Question;
+use ModernPUG\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,7 +14,7 @@ class QController extends Controller
     public function get_write()
     {
         $this->authorize('qna-write');
-        return view('qna::pages.write');
+        return view('mpug::qna.pages.write');
     }
 
     public function post_write(Request $request)
@@ -35,7 +35,7 @@ class QController extends Controller
     {
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
-        return view('qna::pages.edit_q', ['q' => $q]);
+        return view('mpug::qna.pages.edit_q', ['q' => $q]);
     }
 
     public function put_edit(Request $request, $q_id)
@@ -59,7 +59,7 @@ class QController extends Controller
     public function get_list()
     {
         $qs = Question::with('writer')->orderBy('id', 'desc')->paginate(10);
-        return view('qna::pages.list', ['qs' => $qs]);
+        return view('mpug::qna.pages.list', ['qs' => $qs]);
     }
 
     public function get_tagged_list($tag_id)
@@ -68,7 +68,7 @@ class QController extends Controller
             ->with('writer')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('qna::pages.list_tagged', ['qs' => $qs]);
+        return view('mpug::qna.pages.list_tagged', ['qs' => $qs]);
     }
 
     public function get_item($q_id)
@@ -77,6 +77,6 @@ class QController extends Controller
             ->with('comments.votes')
             ->with('votes')
             ->find($q_id);
-        return view('qna::pages.item', ['q' => $q]);
+        return view('mpug::qna.pages.item', ['q' => $q]);
     }
 }

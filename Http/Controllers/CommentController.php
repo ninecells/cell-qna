@@ -2,9 +2,9 @@
 
 namespace ModernPUG\Qna\Http\Controllers;
 
-use ModernPUG\Qna\App\Answer;
-use ModernPUG\Qna\App\Comment;
-use ModernPUG\Qna\App\Question;
+use ModernPUG\Qna\Models\Answer;
+use ModernPUG\Qna\Models\Comment;
+use ModernPUG\Qna\Models\Question;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -33,7 +33,7 @@ class CommentController extends Controller
     {
         $c = Comment::find($c_id);
         $this->authorize('qna-edit', $c);
-        return view('qna::pages.edit_c', ['c' => $c]);
+        return view('mpug::qna.pages.edit_c', ['c' => $c]);
     }
 
     public function put_edit(Request $request, $c_id)

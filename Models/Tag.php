@@ -1,6 +1,6 @@
 <?php
 
-namespace ModernPUG\Qna\App;
+namespace ModernPUG\Qna\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

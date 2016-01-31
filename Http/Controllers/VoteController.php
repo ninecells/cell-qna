@@ -3,10 +3,10 @@
 namespace ModernPUG\Qna\Http\Controllers;
 
 use DB;
-use ModernPUG\Qna\App\Vote;
-use ModernPUG\Qna\App\Answer;
-use ModernPUG\Qna\App\Comment;
-use ModernPUG\Qna\App\Question;
+use ModernPUG\Qna\Models\Vote;
+use ModernPUG\Qna\Models\Answer;
+use ModernPUG\Qna\Models\Comment;
+use ModernPUG\Qna\Models\Question;
 
 use Auth;
 use Response;

@@ -27,7 +27,7 @@
         {{ method_field('DELETE') }}
         <img src="{{ $q->writer->avatar }}" width="16" height="16"/> <b>{{ $q->writer->name }}</b>
         <a href="/qs/{{ $q->id }}">{{ $q->created_at }}</a>
-        | @include('qna::parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
         @can('qna-edit', $q)
         | <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>
@@ -61,7 +61,7 @@
         {{ method_field('DELETE') }}
         <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
         {{ $c->created_at }}
-        | @include('qna::parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>
@@ -99,7 +99,7 @@
         {{ method_field('DELETE') }}
         <img src="{{ $a->writer->avatar }}" width="16" height="16"/> <b>{{ $a->writer->name }}</b>
         <a href="{{ '#'.$a->id }}">{{ $a->created_at }}</a>
-        | @include('qna::parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
         @can('qna-edit', $a)
         | <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>
@@ -122,7 +122,7 @@
         {{ method_field('DELETE') }}
         <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
         {{ $c->created_at }}
-        | @include('qna::parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>

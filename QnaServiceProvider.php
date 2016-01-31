@@ -7,10 +7,10 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
 use NineCells\Auth\AuthServiceProvider;
 
-use ModernPUG\Qna\App\Question;
-use ModernPUG\Qna\App\Answer;
-use ModernPUG\Qna\App\Comment;
-use ModernPUG\Qna\App\Vote;
+use ModernPUG\Qna\Models\Question;
+use ModernPUG\Qna\Models\Answer;
+use ModernPUG\Qna\Models\Comment;
+use ModernPUG\Qna\Models\Vote;
 use ModernPUG\Qna\Policies\QnaPolicy;
 
 class QnaServiceProvider extends ServiceProvider
@@ -43,7 +43,7 @@ class QnaServiceProvider extends ServiceProvider
             require __DIR__ . '/Http/routes.php';
         }
 
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'qna');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'mpug');
 
         $this->publishes([
             __DIR__ . '/database/migrations/' => database_path('migrations')
