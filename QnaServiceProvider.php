@@ -5,6 +5,7 @@ namespace ModernPUG\Qna;
 use App;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
+use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Auth\AuthServiceProvider;
 
 use ModernPUG\Qna\Models\Question;
@@ -50,12 +51,13 @@ class QnaServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('vendor/qna'),
+            __DIR__ . '/resources/assets' => public_path('vendor/modernpug/qna'),
         ], 'public');
     }
 
     public function register()
     {
         App::register(AuthServiceProvider::class);
+        App::register(Twbs3JumboNarrowServiceProvider::class);
     }
 }
