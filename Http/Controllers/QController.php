@@ -77,7 +77,12 @@ class QController extends Controller
             ->with('comments.votes')
             ->with('votes')
             ->find($q_id);
-        config(['title' => $q->title.' - modernpug.org']);
+
+        if (!$q) {
+            abort(404);
+        }
+
+        config(['title' => $q->title . ' - modernpug.org']);
         return view('mpug::qna.pages.item', ['q' => $q]);
     }
 }
