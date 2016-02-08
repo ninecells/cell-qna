@@ -74,7 +74,17 @@ class QController extends Controller
 
     public function get_item($q_id)
     {
-        $q = Question::with('answers.votes')
+        $q = Question::with(['answers' => function ($query) {
+            // 답변은 점수 높은 순으로 정렬
+            $query->selectRaw('answers.*, COALESCE(SUM(votes.grade),0) AS total_grade')
+                ->leftJoin('votes', function ($join) {
+                    $join->on('answers.id', '=', 'votes.votable_id')
+                        ->on('votes.votable_type', '=', \DB::raw("'ModernPUG\\\\Qna\\\\Models\\\\Answer'"));
+                })
+                ->groupBy('answers.id')
+                ->orderBy('total_grade', 'desc')
+                ->with('votes');
+        }])
             ->with('comments.votes')
             ->with('votes')
             ->find($q_id);
