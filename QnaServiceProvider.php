@@ -51,7 +51,7 @@ class QnaServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('vendor/modernpug/qna'),
+            __DIR__ . '/resources/assets' => public_path('vendor/modern-pug/qna'),
         ], 'public');
     }
 

@@ -1,5 +1,5 @@
 {
-  "name": "modernpug/qna",
+  "name": "modern-pug/qna",
   "license": "MIT",
   "require": {
     "php": ">=5.5.9",
