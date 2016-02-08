@@ -1,6 +1,12 @@
 @extends('app')
 
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/">홈</a></li>
+    <li><a href="/qs">Q&A</a></li>
+    <li><a href="/qs/{{ $a->question->id }}#{{ $a->id }}">답변</a></li>
+    <li class="active">답변 수정하기</li>
+</ol>
 
 <h2>답변 수정하기</h2>
 

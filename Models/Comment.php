@@ -37,4 +37,19 @@ class Comment extends Model
     {
         return $this->belongsTo(Answer::class, 'commentable_id');
     }
+
+    public function getUrlAttribute()
+    {
+        $ctype = $this->commentable_type;
+        $subUrl = '';
+        switch($ctype) {
+            case Question::class:
+                $subUrl = $this->commentable_id;
+                break;
+            case Answer::class:
+                $subUrl = $this->answer->question->id."#{$this->commentable_id}";
+                break;
+        }
+        return $subUrl;
+    }
 }

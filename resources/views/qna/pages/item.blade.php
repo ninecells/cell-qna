@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-
 <style>
     .well {
         background-color: #f4f4f4;
@@ -17,6 +16,12 @@
         cursor: hand;
     }
 </style>
+
+<ol class="breadcrumb">
+    <li><a href="/">홈</a></li>
+    <li><a href="/qs">Q&A</a></li>
+    <li class="active">질문 보기</li>
+</ol>
 
 <!-- 질문내용 -->
 <div class="well well-sm">

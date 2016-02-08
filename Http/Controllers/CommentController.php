@@ -25,8 +25,7 @@ class CommentController extends Controller
         }
         $request->merge(['commentable_type' => $ctype]);
         $c = Comment::create($request->all());
-        $redirectUrl = $this->getRedirectUrlWithComment($c);
-        return redirect($redirectUrl);
+        return redirect('qs/'.$c->url);
     }
 
     public function get_edit($c_id)
@@ -42,8 +41,7 @@ class CommentController extends Controller
         $this->authorize('qna-edit', $c);
         $input = $request->only(['content']);
         $c->update($input);
-        $redirectUrl = $this->getRedirectUrlWithComment($c);
-        return redirect($redirectUrl);
+        return redirect('qs/'.$c->url);
     }
 
     public function delete_item($c_id)
@@ -51,22 +49,6 @@ class CommentController extends Controller
         $c = Comment::find($c_id);
         $this->authorize('qna-edit', $c);
         $c->delete();
-        $redirectUrl = $this->getRedirectUrlWithComment($c);
-        return redirect($redirectUrl);
-    }
-
-    private function getRedirectUrlWithComment($c)
-    {
-        $ctype = $c->commentable_type;
-        $subUrl = '';
-        switch($ctype) {
-            case Question::class:
-                $subUrl = $c->commentable_id;
-                break;
-            case Answer::class:
-                $subUrl = $c->answer->question->id."#{$c->commentable_id}";
-                break;
-        }
-        return "qs/$subUrl";
+        return redirect('qs/'.$c->url);
     }
 }

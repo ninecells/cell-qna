@@ -64,11 +64,12 @@ class QController extends Controller
 
     public function get_tagged_list($tag_id)
     {
-        $qs = Tag::find($tag_id)->questions()
+        $tag = Tag::find($tag_id);
+        $qs = $tag->questions()
             ->with('writer')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('mpug::qna.pages.list_tagged', ['qs' => $qs]);
+        return view('mpug::qna.pages.list_tagged', ['tag' => $tag, 'qs' => $qs]);
     }
 
     public function get_item($q_id)

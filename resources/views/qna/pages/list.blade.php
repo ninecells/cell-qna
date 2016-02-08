@@ -1,6 +1,10 @@
 @extends('app')
 
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="/">홈</a></li>
+    <li class="active">Q&A</li>
+</ol>
 
 <h2>Q&A</h2>
 @if(Auth::check())
