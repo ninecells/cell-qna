@@ -33,6 +33,7 @@
         <img src="{{ $q->writer->avatar }}" width="16" height="16"/> <b>{{ $q->writer->name }}</b>
         <a href="/qs/{{ $q->id }}">{{ $q->created_at }}</a>
         | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
+        | 조회수: {{ $q->viewCounts->count() }}
         @can('qna-edit', $q)
         | <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>

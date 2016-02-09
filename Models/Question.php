@@ -78,4 +78,9 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class, 'q_id');
     }
+
+    public function viewCounts()
+    {
+        return $this->hasMany(ViewCount::class, 'q_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace ModernPUG\Qna\Http\Controllers;
 
 use ModernPUG\Qna\Models\Question;
+use ModernPUG\Qna\Models\ViewCount;
 use ModernPUG\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,7 @@ class QController extends Controller
         return view('mpug::qna.pages.list_tagged', ['tag' => $tag, 'qs' => $qs]);
     }
 
-    public function get_item($q_id)
+    public function get_item(Request $request, $q_id)
     {
         $q = Question::with(['answers' => function ($query) {
             // 답변은 점수 높은 순으로 정렬
@@ -93,7 +94,16 @@ class QController extends Controller
             abort(404);
         }
 
+        // 조회수 증가
+        ViewCount::create([
+            'q_id' => $q->id,
+            'ip' => $request->ip(),
+            'user_id' => Auth::check() ? Auth::user()->id : 0,
+        ]);
+
+        // 타이틀 지정
         config(['title' => $q->title . ' - modernpug.org']);
+
         return view('mpug::qna.pages.item', ['q' => $q]);
     }
 }

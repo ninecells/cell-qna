@@ -57,6 +57,14 @@ class CreateQnaTables extends Migration
             $table->timestamps();
             $table->unique(['votable_id', 'votable_type', 'voter_id']);
         });
+
+        Schema::create('view_counts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('q_id')->index();
+            $table->string('ip')->index();
+            $table->integer('user_id')->index();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -72,5 +80,6 @@ class CreateQnaTables extends Migration
         Schema::drop('tags');
         Schema::drop('taggables');
         Schema::drop('votes');
+        Schema::drop('view_counts');
     }
 }
