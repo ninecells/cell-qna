@@ -59,7 +59,8 @@ class QController extends Controller
 
     public function get_list()
     {
-        $qs = Question::with('writer')
+        $qs = Question::with('viewCounts')
+            ->with('writer.socials')
             ->with('answers')
             ->orderBy('id', 'desc')->paginate(10);
         return view('mpug::qna.pages.list', ['qs' => $qs]);
@@ -78,19 +79,26 @@ class QController extends Controller
 
     public function get_item(Request $request, $q_id)
     {
-        $q = Question::with(['answers' => function ($query) {
-            // 답변은 점수 높은 순으로 정렬
-            $query->selectRaw('answers.*, COALESCE(SUM(votes.grade),0) AS total_grade')
-                ->leftJoin('votes', function ($join) {
-                    $join->on('answers.id', '=', 'votes.votable_id')
-                        ->on('votes.votable_type', '=', \DB::raw("'ModernPUG\\\\Qna\\\\Models\\\\Answer'"));
-                })
-                ->groupBy('answers.id')
-                ->orderBy('total_grade', 'desc')
-                ->with('votes');
-        }])
-            ->with('comments.votes')
+        $q = Question::with('writer.socials')
+            ->with('tags')
+            ->with('viewCounts')
+            ->with(['answers' => function ($query) {
+                // 답변은 점수 높은 순으로 정렬
+                $query->selectRaw('answers.*, COALESCE(SUM(votes.grade),0) AS total_grade')
+                    ->leftJoin('votes', function ($join) {
+                        $join->on('answers.id', '=', 'votes.votable_id')
+                            ->on('votes.votable_type', '=', \DB::raw("'ModernPUG\\\\Qna\\\\Models\\\\Answer'"));
+                    })
+                    ->groupBy('answers.id')
+                    ->orderBy('total_grade', 'desc')
+                    ->with('writer.socials')
+                    ->with('comments.writer.socials')
+                    ->with('comments.votes')
+                    ->with('votes');
+            }])
             ->with('votes')
+            ->with('comments.writer.socials')
+            ->with('comments.votes')
             ->find($q_id);
 
         if (!$q) {
