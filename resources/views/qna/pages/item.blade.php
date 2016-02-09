@@ -26,7 +26,7 @@
 <!-- 질문내용 -->
 <div class="well well-sm">
     <!-- 수정/삭제 버튼 -->
-    <h1 style="margin-top: 0px;">{{ $q->title }}</h1>
+    <h3 style="margin-top: 0px;">{{ $q->title }}</h3>
     <form method="POST" action="/qs/{{ $q->id }}/delete">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
