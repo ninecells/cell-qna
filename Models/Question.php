@@ -45,7 +45,7 @@ class Question extends Model
 
         $tags = explode(',', $tags);
         foreach ($tags as $tagName) {
-            $tagName = trim($tagName);
+            $tagName = strtolower(trim($tagName));
             $tag = Tag::firstOrNew(['name' => $tagName]);
             $tag->save();
 
