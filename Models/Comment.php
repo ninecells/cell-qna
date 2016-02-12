@@ -13,6 +13,13 @@ class Comment extends Model
         'commentable_id', 'commentable_type', 'content', 'writer_id',
     ];
 
+    public function getMdContentAttribute()
+    {
+        $content = $this->attributes['content'];
+        $parsedown = new \Parsedown();
+        return $parsedown->text($content);
+    }
+
     public function votes()
     {
         return $this->morphMany(Vote::class, 'votable');
