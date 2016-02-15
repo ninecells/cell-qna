@@ -4,7 +4,6 @@
 <style>
     .well {
         background-color: #f4f4f4;
-        margin-bottom: 50px;
     }
 
     .well hr {
@@ -16,6 +15,8 @@
         cursor: hand;
     }
 </style>
+
+<div class="alert alert-info" role="alert">신규 스킨 적용 예정</div>
 
 <ol class="breadcrumb">
     <li><a href="/">홈</a></li>
@@ -68,13 +69,13 @@
         {{ method_field('DELETE') }}
         <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
         {{ $c->created_at }}
-        | @include('mpug::qna.parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>
         @endcan
     </form>
-    {{ $c->content }}
+    {!! $c->md_content !!}
     @endforeach
 
     @can('qna-write')
@@ -92,7 +93,21 @@
     @endcan
 </div>
 
-<hr/>
+
+<!-- 답변하기 창 -->
+@can('qna-write')
+<form method="POST" action="/as/write">
+    {{ csrf_field() }}
+    <input type="hidden" name="q_id" value="{{ $q->id }}"/>
+    <div class="form-group">
+        <label for="content">답변</label>
+        <textarea class="form-control" id="content" name="content" placeholder="답변" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">답변하기</button>
+</form>
+<br/>
+@endcan
+
 
 <!-- 답변내용 -->
 @foreach($q->answers as $a)
@@ -129,13 +144,13 @@
         {{ method_field('DELETE') }}
         <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
         {{ $c->created_at }}
-        | @include('mpug::qna.parts.vote', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+        | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
         <button class="btn btn-xs btn-danger">삭제</button>
         @endcan
     </form>
-    {{ $c->content }}
+    {!! $c->md_content !!}
     @endforeach
 
     @can('qna-write')
@@ -153,20 +168,6 @@
     @endcan
 </div>
 @endforeach
-
-<!-- 답변하기 창 -->
-@can('qna-write')
-<form method="POST" action="/as/write">
-    {{ csrf_field() }}
-    <input type="hidden" name="q_id" value="{{ $q->id }}"/>
-    <div class="form-group">
-        <label for="content">답변</label>
-        <textarea class="form-control" id="content" name="content" placeholder="답변" rows="4"></textarea>
-    </div>
-    <button type="submit" class="btn btn-default">답변하기</button>
-</form>
-@endcan
-
 @endsection
 
 @section('script')

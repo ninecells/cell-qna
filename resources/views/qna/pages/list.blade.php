@@ -1,28 +1,19 @@
 @extends('app')
 
 @section('content')
+<div class="alert alert-info" role="alert">신규 스킨 적용 예정</div>
+
 <ol class="breadcrumb">
     <li><a href="/">홈</a></li>
     <li class="active">Q&A</li>
 </ol>
 
+<div class="well">기능 추가 요청은 <a href="/qs/8">여기</a>에 답변으로 달아주세요.<br/>일정 인원 이상이 참여한, 투표가 많이 된 요청을 우선하여 기능 추가하겠습니다.</div>
 <h2>Q&A</h2>
 
 @if(Auth::check())
 <p><a class="btn btn-success" href="/qs/write">질문하기</a></p>
 @endif
 
-<ul class="list-group">
-    @foreach($qs as $q)
-    <a href="/qs/{{ $q->id }}" class="list-group-item">
-        <img src="{{ $q->writer->avatar }}" width="16" height="16"/> <b>{{ $q->writer->name }}</b>
-        {{ $q->created_at }}
-        | 조회수: {{ $q->viewCounts->count() }}
-        | 답변수: {{ $q->answers->count() }}
-        <h4>{{ $q->title }}</h4>
-    </a>
-    @endforeach
-</ul>
-
-{!! $qs->links() !!}
+@include('mpug::qna.parts.list', ['qs' => $qs])
 @endsection
