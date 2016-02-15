@@ -5,7 +5,7 @@ function iterate($objs, $handler)
     global $cache;
     foreach ($objs as $obj) {
         if (isset($cache[$obj->writer->id])) {
-            return;
+            continue;
         }
         $cache[$obj->writer->id] = true;
         $handler($obj);
