@@ -24,7 +24,7 @@ function clear()
     @foreach($qs as $q)
     <a href="/qs/{{ $q->id }}" class="list-group-item">
         <img src="{{ $q->writer->avatar }}" width="16" height="16"/> <b>{{ $q->writer->name }}</b>
-        {{ $q->created_at }}
+        | {{ $q->created_at }}
         | 조회수: {{ $q->viewCounts->count() }}
         | 답변수: {{ $q->answers->count() }}
         <?php iterate($q->answers, function ($the) { ?>
