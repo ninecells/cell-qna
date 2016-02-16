@@ -10,13 +10,18 @@ class MemberController extends Controller
 {
     public function GET_member_qna_info($member_id)
     {
-        $questions = Question::where('writer_id', $member_id)
+        $qs = Question::where('writer_id', $member_id)
+            ->with('viewCounts')
+            ->with('comments.writer')
+            ->with('writer.socials')
+            ->with('answers.writer')
+            ->with('answers.comments.writer')
             ->orderBy('id', 'desc')
             ->paginate(10);
 
         return view('mpug::qna.pages.member_qna', [
             'member_id' => $member_id,
-            'questions' => $questions
+            'qs' => $qs
         ]);
     }
 }

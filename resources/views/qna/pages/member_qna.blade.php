@@ -62,7 +62,7 @@ $grade_cs = (sizeof($grade_cs) == 0 ? 0 : $grade_cs[0]->grade);
                     </ul>
 
                     <h4>질문:</h4>
-                    @include('mpug::qna.parts.list', ['qs' => $questions])
+                    @include('mpug::qna.parts.list', ['qs' => $qs])
                 </div>
             </div>
         </div>

@@ -64,7 +64,8 @@ class QController extends Controller
             ->with('writer.socials')
             ->with('answers.writer')
             ->with('answers.comments.writer')
-            ->orderBy('id', 'desc')->paginate(10);
+            ->orderBy('id', 'desc')
+            ->paginate(10);
         return view('mpug::qna.pages.list', ['qs' => $qs]);
     }
 
@@ -72,6 +73,7 @@ class QController extends Controller
     {
         $tag = Tag::find($tag_id);
         $qs = $tag->questions()
+            ->with('viewCounts')
             ->with('comments.writer')
             ->with('writer.socials')
             ->with('answers.writer')
