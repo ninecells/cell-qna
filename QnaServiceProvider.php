@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
 use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Auth\AuthServiceProvider;
+use NineCells\Auth\MemberTab;
 
 use ModernPUG\Qna\Models\Question;
 use ModernPUG\Qna\Models\Answer;
@@ -36,7 +37,7 @@ class QnaServiceProvider extends ServiceProvider
         }
     }
 
-    public function boot(GateContract $gate)
+    public function boot(GateContract $gate, MemberTab $tab)
     {
         $this->registerPolicies($gate);
 
@@ -53,6 +54,10 @@ class QnaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/resources/assets' => public_path('vendor/modern-pug/qna'),
         ], 'public');
+
+        $tab->addMemberTabItemInfo('qna', 'Q&A', function($member_id) {
+            return route('mpug::url.qna.member_qna', $member_id);
+        });
     }
 
     public function register()
