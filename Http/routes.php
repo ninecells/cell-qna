@@ -26,4 +26,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('vote/up', 'VoteController@post_up');
         Route::post('vote/down', 'VoteController@post_down');
     });
+
+    Route::group(['namespace' => 'ModernPUG\Qna\Http\Controllers'], function() {
+
+        Route::get('members/{member_id}/qna', 'MemberController@GET_member_qna_info');
+    });
 });
