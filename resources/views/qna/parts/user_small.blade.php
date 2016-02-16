@@ -1,0 +1,1 @@
+<img src="{{ $user->avatar }}" width="16" height="16"/> <b><a href="/members/{{ $user->id }}/qna">{{ $user->name }}</a></b>

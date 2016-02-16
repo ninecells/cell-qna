@@ -24,6 +24,10 @@
     <li class="active">질문 보기</li>
 </ol>
 
+
+
+
+
 <!-- 질문내용 -->
 <div class="well well-sm">
     <!-- 수정/삭제 버튼 -->
@@ -31,7 +35,7 @@
     <form method="POST" action="/qs/{{ $q->id }}/delete">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <img src="{{ $q->writer->avatar }}" width="16" height="16"/> <b>{{ $q->writer->name }}</b>
+        @include('mpug::qna.parts.user_small', ['user' => $q->writer])
         <a href="/qs/{{ $q->id }}">{{ $q->created_at }}</a>
         | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
         | 조회수: {{ $q->viewCounts->count() }}
@@ -67,7 +71,7 @@
     <form method="POST" action="/comments/{{ $c->id }}/delete">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
+        @include('mpug::qna.parts.user_small', ['user' => $c->writer])
         {{ $c->created_at }}
         | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
@@ -94,6 +98,9 @@
 </div>
 
 
+
+
+
 <!-- 답변하기 창 -->
 @can('qna-write')
 <form method="POST" action="/as/write">
@@ -109,6 +116,9 @@
 @endcan
 
 
+
+
+
 <!-- 답변내용 -->
 @foreach($q->answers as $a)
 <div class="well well-sm">
@@ -119,7 +129,7 @@
     <form method="POST" action="/as/{{ $a->id }}/delete">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <img src="{{ $a->writer->avatar }}" width="16" height="16"/> <b>{{ $a->writer->name }}</b>
+        @include('mpug::qna.parts.user_small', ['user' => $a->writer])
         <a href="{{ '#'.$a->id }}">{{ $a->created_at }}</a>
         | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
         @can('qna-edit', $a)
@@ -142,7 +152,7 @@
     <form method="POST" action="/comments/{{ $c->id }}/delete">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <img src="{{ $c->writer->avatar }}" width="16" height="16"/> <b>{{ $c->writer->name }}</b>
+        @include('mpug::qna.parts.user_small', ['user' => $c->writer])
         {{ $c->created_at }}
         | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
