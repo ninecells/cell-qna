@@ -36,7 +36,7 @@
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
         @include('mpug::qna.parts.user_small', ['user' => $q->writer])
-        | <a href="/qs/{{ $q->id }}">{{ $q->created_at }}</a>
+        | <a href="/qs/{{ $q->id }}">{{ $q->created_at->diffForHumans() }}</a>
         | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
         | 조회수: {{ $q->viewCounts->count() }}
         | 답변수: {{ $q->answers->count() }}
@@ -72,7 +72,7 @@
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
         @include('mpug::qna.parts.user_small', ['user' => $c->writer])
-        | {{ $c->created_at }}
+        | {{ $c->created_at->diffForHumans() }}
         | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
@@ -130,7 +130,7 @@
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
         @include('mpug::qna.parts.user_small', ['user' => $a->writer])
-        | <a href="{{ '#'.$a->id }}">{{ $a->created_at }}</a>
+        | <a href="{{ '#'.$a->id }}">{{ $a->created_at->diffForHumans() }}</a>
         | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
         @can('qna-edit', $a)
         | <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
@@ -153,7 +153,7 @@
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
         @include('mpug::qna.parts.user_small', ['user' => $c->writer])
-        | {{ $c->created_at }}
+        | {{ $c->created_at->diffForHumans() }}
         | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
         @can('qna-edit', $c)
         | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
