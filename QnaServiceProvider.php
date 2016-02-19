@@ -5,6 +5,7 @@ namespace ModernPUG\Qna;
 use App;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
+use Mews\Purifier\PurifierServiceProvider;
 use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Auth\AuthServiceProvider;
 use NineCells\Auth\MemberTab;
@@ -64,5 +65,6 @@ class QnaServiceProvider extends ServiceProvider
     {
         App::register(AuthServiceProvider::class);
         App::register(Twbs3JumboNarrowServiceProvider::class);
+        App::register(PurifierServiceProvider::class);
     }
 }
