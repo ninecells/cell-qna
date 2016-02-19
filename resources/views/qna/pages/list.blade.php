@@ -8,7 +8,6 @@
     <li class="active">Q&A</li>
 </ol>
 
-<div class="well">기능 추가 요청은 <a href="/qs/8">여기</a>에 답변으로 달아주세요.<br/>일정 인원 이상이 참여한, 투표가 많이 된 요청을 우선하여 기능 추가하겠습니다.</div>
 <h2>Q&A</h2>
 
 @if(Auth::check())
