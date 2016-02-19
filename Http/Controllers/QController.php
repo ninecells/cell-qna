@@ -118,11 +118,36 @@ class QController extends Controller
             'user_id' => Auth::check() ? Auth::user()->id : 0,
         ]);
 
-        // 타이틀 지정
+        // 메타 지정
+        $desc = strip_tags($q->md_content);
+        $desc = str_replace("\r\n", "\n", $desc);
+        $desc = str_replace("\r", " ", $desc);
+        $desc = str_replace("\n", " ", $desc);
+        $desc = $this->limit_words($desc, 30);
+
         config(['title' => $q->title]);
+        config(['author' => $q->writer->name]);
+        config(['description' => $desc]);
+        config(['keywords' => $q->tagsString]);
+
         config(['og:title' => $q->title]);
-        config(['og:description' => strip_tags($q->md_content)]);
+        config(['og:description' => $desc]);
 
         return view('mpug::qna.pages.item', ['q' => $q]);
+    }
+
+    private function limit_words($words, $limit, $append = ' &hellip;')
+    {
+        // Add 1 to the specified limit becuase arrays start at 0
+        $limit = $limit+1;
+        // Store each individual word as an array element
+        // Up to the limit
+        $words = explode(' ', $words, $limit);
+        // Shorten the array by 1 because that final element will be the sum of all the words after the limit
+        array_pop($words);
+        // Implode the array for output, and append an ellipse
+        $words = implode(' ', $words) . $append;
+        // Return the result
+        return $words;
     }
 }
