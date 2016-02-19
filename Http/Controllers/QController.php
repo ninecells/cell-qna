@@ -119,7 +119,9 @@ class QController extends Controller
         ]);
 
         // 타이틀 지정
-        config(['title' => $q->title . ' - modernpug.org']);
+        config(['title' => $q->title]);
+        config(['og:title' => $q->title]);
+        config(['og:description' => strip_tags($q->md_content)]);
 
         return view('mpug::qna.pages.item', ['q' => $q]);
     }
