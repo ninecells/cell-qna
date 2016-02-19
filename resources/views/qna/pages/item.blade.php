@@ -58,7 +58,8 @@
         <?php
         $aTags = [];
         foreach ($q->tags as $tag) {
-            $item = "<a href='/qs/tags/{$tag->id}'>{$tag->name}</a>";
+            $name = clean($tag->name);
+            $item = "<a href='/qs/tags/{$tag->id}'>{$name}</a>";
             array_push($aTags, $item);
         }
         ?>
