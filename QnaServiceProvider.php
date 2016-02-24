@@ -7,8 +7,10 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
 use Mews\Purifier\PurifierServiceProvider;
 use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
+use NineCells\Admin\AdminServiceProvider;
 use NineCells\Auth\AuthServiceProvider;
 use NineCells\Auth\MemberTab;
+use NineCells\Admin\PackageList;
 
 use ModernPUG\Qna\Models\Question;
 use ModernPUG\Qna\Models\Answer;
@@ -38,7 +40,7 @@ class QnaServiceProvider extends ServiceProvider
         }
     }
 
-    public function boot(GateContract $gate, MemberTab $tab)
+    public function boot(GateContract $gate, MemberTab $tab, PackageList $packages)
     {
         $this->registerPolicies($gate);
 
@@ -59,11 +61,16 @@ class QnaServiceProvider extends ServiceProvider
         $tab->addMemberTabItemInfo('qna', 'Q&A', function($member_id) {
             return route('mpug::url.qna.member_qna', $member_id);
         });
+
+        $packages->addPackageInfo('qna', 'Q&A', function() {
+            return 'QnaServiceProvider.php를 수정하세요';
+        });
     }
 
     public function register()
     {
         App::register(AuthServiceProvider::class);
+        App::register(AdminServiceProvider::class);
         App::register(Twbs3JumboNarrowServiceProvider::class);
         App::register(PurifierServiceProvider::class);
     }
