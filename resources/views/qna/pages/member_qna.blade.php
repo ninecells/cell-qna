@@ -44,7 +44,7 @@ $grade_cs = DB::select('
 $grade_cs = (sizeof($grade_cs) == 0 ? 0 : $grade_cs[0]->grade);
 
 ?>
-@extends('app')
+@extends('ncells::jumbotron.app')
 
 @section('content')
 <div class="row">
