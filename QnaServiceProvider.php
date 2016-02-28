@@ -54,10 +54,6 @@ class QnaServiceProvider extends ServiceProvider
             __DIR__ . '/database/migrations/' => database_path('migrations')
         ], 'migrations');
 
-        $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('vendor/modern-pug/qna'),
-        ], 'public');
-
         $tab->addMemberTabItemInfo('qna', 'Q&A', function($member_id) {
             return route('mpug::url.qna.member_qna', $member_id);
         });
