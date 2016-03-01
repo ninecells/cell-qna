@@ -7,7 +7,6 @@ use ModernPUG\Qna\Models\ViewCount;
 use ModernPUG\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Auth;
 
 class QController extends Controller
@@ -44,7 +43,7 @@ class QController extends Controller
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
         $input = $request->only(['title', 'content']);
-        $q->where('id', $q_id)->update($input);
+        $q->update($input);
         $q->tags = $request->input('tags');
         return redirect("qs/{$q->id}");
     }
