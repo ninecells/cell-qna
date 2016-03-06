@@ -8,6 +8,7 @@ use ModernPUG\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
 use Auth;
+use Response;
 
 class QController extends Controller
 {
@@ -53,7 +54,7 @@ class QController extends Controller
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
         $q->delete();
-        return redirect('qs');
+        return Response::json(['redirect' => '/qs']);
     }
 
     public function get_list()

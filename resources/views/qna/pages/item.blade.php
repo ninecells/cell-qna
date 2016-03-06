@@ -23,26 +23,19 @@
 </ol>
 
 
-
-
-
 <!-- 질문내용 -->
 <div class="well well-sm">
     <!-- 수정/삭제 버튼 -->
     <h3 style="margin-top: 0px;">{{ $q->title }}</h3>
-    <form method="POST" action="/qs/{{ $q->id }}/delete">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        @include('mpug::qna.parts.user_small', ['user' => $q->writer])
-        | <a href="/qs/{{ $q->id }}">{{ $q->created_at->diffForHumans() }}</a>
-        | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
-        | 조회수: {{ $q->viewCounts->count() }}
-        | 답변수: {{ $q->answers->count() }}
-        @can('qna-edit', $q)
-        | <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
-        <button class="btn btn-xs btn-danger">삭제</button>
-        @endcan
-    </form>
+    @include('mpug::qna.parts.user_small', ['user' => $q->writer])
+    | <a href="/qs/{{ $q->id }}">{{ $q->created_at->diffForHumans() }}</a>
+    | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
+    | 조회수: {{ $q->viewCounts->count() }}
+    | 답변수: {{ $q->answers->count() }}
+    @can('qna-edit', $q)
+    | <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
+    <a href="#" data-href="/qs/{{ $q->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
+    @endcan
     <hr/>
     {!! $q->md_content !!}
     <p class="text-right">
@@ -67,17 +60,13 @@
     <!-- 코멘트 목록 -->
     @foreach($q->comments as $c)
     <hr/>
-    <form method="POST" action="/comments/{{ $c->id }}/delete">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        @include('mpug::qna.parts.user_small', ['user' => $c->writer])
-        | {{ $c->created_at->diffForHumans() }}
-        | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
-        @can('qna-edit', $c)
-        | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
-        <button class="btn btn-xs btn-danger">삭제</button>
-        @endcan
-    </form>
+    @include('mpug::qna.parts.user_small', ['user' => $c->writer])
+    | {{ $c->created_at->diffForHumans() }}
+    | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+    @can('qna-edit', $c)
+    | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
+    <a href="#" data-href="/comments/{{ $c->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
+    @endcan
     {!! $c->md_content !!}
     @endforeach
 
@@ -97,9 +86,6 @@
 </div>
 
 
-
-
-
 <!-- 답변하기 창 -->
 @can('qna-write')
 <form method="POST" action="/as/write">
@@ -115,9 +101,6 @@
 @endcan
 
 
-
-
-
 <!-- 답변내용 -->
 @foreach($q->answers as $a)
 <div class="well well-sm">
@@ -125,17 +108,13 @@
     <a name="{{ $a->id }}"></a>
 
     <!-- 수정/삭제 버튼 -->
-    <form method="POST" action="/as/{{ $a->id }}/delete">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        @include('mpug::qna.parts.user_small', ['user' => $a->writer])
-        | <a href="{{ '#'.$a->id }}">{{ $a->created_at->diffForHumans() }}</a>
-        | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
-        @can('qna-edit', $a)
-        | <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
-        <button class="btn btn-xs btn-danger">삭제</button>
-        @endcan
-    </form>
+    @include('mpug::qna.parts.user_small', ['user' => $a->writer])
+    | <a href="{{ '#'.$a->id }}">{{ $a->created_at->diffForHumans() }}</a>
+    | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
+    @can('qna-edit', $a)
+    | <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
+    <a href="#" data-href="/as/{{ $a->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
+    @endcan
     <hr/>
     {!! $a->md_content !!}
     <p class="text-right">
@@ -148,17 +127,13 @@
     <!-- 코멘트 목록 -->
     @foreach($a->comments as $c)
     <hr/>
-    <form method="POST" action="/comments/{{ $c->id }}/delete">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        @include('mpug::qna.parts.user_small', ['user' => $c->writer])
-        | {{ $c->created_at->diffForHumans() }}
-        | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
-        @can('qna-edit', $c)
-        | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
-        <button class="btn btn-xs btn-danger">삭제</button>
-        @endcan
-    </form>
+    @include('mpug::qna.parts.user_small', ['user' => $c->writer])
+    | {{ $c->created_at->diffForHumans() }}
+    | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+    @can('qna-edit', $c)
+    | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
+    <a href="#" data-href="/comments/{{ $c->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
+    @endcan
     {!! $c->md_content !!}
     @endforeach
 
@@ -192,6 +167,29 @@
             var votable_id = $(this).data('id'),
                 votable_type = $(this).data('type');
             vote(votable_id, votable_type, 'down');
+        });
+
+        $('.btn.delete').click(function () {
+            var href = $(this).data('href');
+
+            $.ajax({
+                url: href,
+                type: "POST",
+                data: {_method: 'DELETE'},
+                success: function (data, textStatus, jqXHR) {
+                    var redirect = data.redirect;
+                    if (redirect.indexOf('#') == -1) {
+                        window.location.href = redirect;
+                    } else {
+                        var hash = redirect.split('#')[1];
+                        window.location.hash = hash;
+                        window.location.reload();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {}
+            });
+
+            return false;
         });
 
         function vote(votable_id, votable_type, grade) {

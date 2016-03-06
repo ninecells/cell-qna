@@ -6,6 +6,7 @@ use ModernPUG\Qna\Models\Answer;
 use Illuminate\Http\Request;
 
 use Auth;
+use Response;
 
 class AController extends Controller
 {
@@ -38,6 +39,6 @@ class AController extends Controller
         $a = Answer::find($a_id);
         $this->authorize('qna-edit', $a);
         $a->delete();
-        return redirect("qs/{$a->q_id}");
+        return Response::json(['redirect' => "/qs/{$a->q_id}"]);
     }
 }

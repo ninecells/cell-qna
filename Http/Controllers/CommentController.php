@@ -6,7 +6,9 @@ use ModernPUG\Qna\Models\Answer;
 use ModernPUG\Qna\Models\Comment;
 use ModernPUG\Qna\Models\Question;
 use Illuminate\Http\Request;
+
 use Auth;
+use Response;
 
 class CommentController extends Controller
 {
@@ -49,6 +51,6 @@ class CommentController extends Controller
         $c = Comment::find($c_id);
         $this->authorize('qna-edit', $c);
         $c->delete();
-        return redirect('qs/'.$c->url);
+        return Response::json(['redirect' => '/qs/'.$c->url]);
     }
 }
