@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Mews\Purifier\PurifierServiceProvider;
 use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Admin\AdminServiceProvider;
-use NineCells\Auth\AuthServiceProvider;
+use NineCells\Auth\MemberServiceProvider;
 use NineCells\Auth\MemberTab;
 use NineCells\Admin\PackageList;
 
@@ -65,7 +65,7 @@ class QnaServiceProvider extends ServiceProvider
 
     public function register()
     {
-        App::register(AuthServiceProvider::class);
+        App::register(MemberServiceProvider::class);
         App::register(AdminServiceProvider::class);
         App::register(Twbs3JumboNarrowServiceProvider::class);
         App::register(PurifierServiceProvider::class);
