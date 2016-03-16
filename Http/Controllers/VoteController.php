@@ -52,7 +52,7 @@ class VoteController extends Controller
             $vote->save();
         }
 
-        $voteCount = DB::table('votes')
+        $voteCount = DB::table('qna_votes')
             ->where([
                 'votable_id' => $votable_id,
                 'votable_type' => $votable_type,
