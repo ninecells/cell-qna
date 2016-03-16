@@ -8,8 +8,8 @@ use Illuminate\Support\ServiceProvider;
 use Mews\Purifier\PurifierServiceProvider;
 use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Admin\AdminServiceProvider;
-use NineCells\Auth\MemberServiceProvider;
-use NineCells\Auth\MemberTab;
+use NineCells\Member\MemberServiceProvider;
+use NineCells\Member\MemberTab;
 use NineCells\Admin\PackageList;
 
 use ModernPUG\Qna\Models\Question;
