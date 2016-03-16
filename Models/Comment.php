@@ -9,6 +9,8 @@ class Comment extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'qna_comments';
+
     protected $fillable = [
         'commentable_id', 'commentable_type', 'content', 'writer_id',
     ];

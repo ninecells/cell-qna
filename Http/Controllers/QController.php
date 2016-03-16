@@ -90,12 +90,12 @@ class QController extends Controller
             ->with('viewCounts')
             ->with(['answers' => function ($query) {
                 // 답변은 점수 높은 순으로 정렬
-                $query->selectRaw('answers.*, COALESCE(SUM(votes.grade),0) AS total_grade')
-                    ->leftJoin('votes', function ($join) {
-                        $join->on('answers.id', '=', 'votes.votable_id')
-                            ->on('votes.votable_type', '=', \DB::raw("'ModernPUG\\\\Qna\\\\Models\\\\Answer'"));
+                $query->selectRaw('qna_answers.*, COALESCE(SUM(qna_votes.grade),0) AS total_grade')
+                    ->leftJoin('qna_votes', function ($join) {
+                        $join->on('qna_answers.id', '=', 'qna_votes.votable_id')
+                            ->on('qna_votes.votable_type', '=', \DB::raw("'ModernPUG\\\\Qna\\\\Models\\\\Answer'"));
                     })
-                    ->groupBy('answers.id')
+                    ->groupBy('qna_answers.id')
                     ->orderBy('total_grade', 'desc')
                     ->with('writer.socials')
                     ->with('comments.writer.socials')

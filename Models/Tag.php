@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+    protected $table = 'qna_tags';
+
     public $timestamps = false;
 
     protected $fillable = [

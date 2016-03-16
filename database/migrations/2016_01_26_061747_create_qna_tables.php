@@ -12,7 +12,7 @@ class CreateQnaTables extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('qna_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->longText('content');
@@ -21,7 +21,7 @@ class CreateQnaTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('qna_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('q_id')->index();
             $table->longText('content');
@@ -30,7 +30,7 @@ class CreateQnaTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('qna_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('commentable');
             $table->longText('content');
@@ -39,17 +39,17 @@ class CreateQnaTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('qna_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
         });
 
-        Schema::create('taggables', function (Blueprint $table) {
+        Schema::create('qna_taggables', function (Blueprint $table) {
             $table->integer('tag_id')->index();
             $table->morphs('taggable');
         });
 
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('qna_votes', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('votable');
             $table->integer('grade');
@@ -58,7 +58,7 @@ class CreateQnaTables extends Migration
             $table->unique(['votable_id', 'votable_type', 'voter_id']);
         });
 
-        Schema::create('view_counts', function (Blueprint $table) {
+        Schema::create('qna_view_counts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('q_id')->index();
             $table->string('ip')->index();
@@ -74,12 +74,12 @@ class CreateQnaTables extends Migration
      */
     public function down()
     {
-        Schema::drop('questions');
-        Schema::drop('answers');
-        Schema::drop('comments');
-        Schema::drop('tags');
-        Schema::drop('taggables');
-        Schema::drop('votes');
-        Schema::drop('view_counts');
+        Schema::drop('qna_questions');
+        Schema::drop('qna_answers');
+        Schema::drop('qna_comments');
+        Schema::drop('qna_tags');
+        Schema::drop('qna_taggables');
+        Schema::drop('qna_votes');
+        Schema::drop('qna_view_counts');
     }
 }

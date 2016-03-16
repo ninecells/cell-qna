@@ -14,8 +14,8 @@ class MemberController extends Controller
         $grade_qs = DB::select('
     SELECT
       COALESCE(SUM(V.grade),0) grade
-    FROM questions Q
-    JOIN votes V
+    FROM qna_questions Q
+    JOIN qna_votes V
     ON V.votable_id = Q.id
     AND V.votable_type = ?
     WHERE writer_id = ?
@@ -26,8 +26,8 @@ class MemberController extends Controller
         $grade_as = DB::select('
     SELECT
       COALESCE(SUM(V.grade),0) grade
-    FROM answers A
-    JOIN votes V
+    FROM qna_answers A
+    JOIN qna_votes V
     ON V.votable_id = A.id
     AND V.votable_type = ?
     WHERE writer_id = ?
@@ -38,8 +38,8 @@ class MemberController extends Controller
         $grade_cs = DB::select('
     SELECT
       COALESCE(SUM(V.grade),0) grade
-    FROM comments C
-    JOIN votes V
+    FROM qna_comments C
+    JOIN qna_votes V
     ON V.votable_id = C.id
     AND V.votable_type = ?
     WHERE writer_id = ?

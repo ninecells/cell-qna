@@ -9,6 +9,8 @@ class Question extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'qna_questions';
+
     protected $fillable = [
         'title', 'content', 'writer_id',
     ];
@@ -22,7 +24,7 @@ class Question extends Model
 
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable', 'qna_taggables');
     }
 
     public function getTagsStringAttribute()

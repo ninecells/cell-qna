@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
+    protected $table = 'qna_votes';
+
     protected $fillable = [
         'votable_id', 'votable_type', 'grade', 'voter_id',
     ];

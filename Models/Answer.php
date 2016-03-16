@@ -9,6 +9,8 @@ class Answer extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'qna_answers';
+
     protected $fillable = [
         'q_id', 'content', 'writer_id',
     ];
