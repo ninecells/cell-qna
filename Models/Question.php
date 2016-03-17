@@ -61,6 +61,22 @@ class Question extends Model
         }
     }
 
+    public function getTagsHtmlAttribute()
+    {
+        $aTags = [];
+        foreach ($this->tags as $tag) {
+            $name = trim(clean($tag->name));
+            if (!$name) {
+                continue;
+            }
+            $item = "<a href='/qs/tags/{$tag->id}'>{$name}</a>";
+            array_push($aTags, $item);
+        }
+        $html = join(', ', $aTags);
+
+        return $html;
+    }
+
     public function getNumVotesWithPadAttribute()
     {
         $grade = $this->votes->sum('grade');
