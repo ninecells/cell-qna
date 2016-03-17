@@ -61,6 +61,16 @@ class Question extends Model
         }
     }
 
+    public function getNumVotesWithPadAttribute()
+    {
+        $grade = $this->votes->sum('grade');
+        if (strlen($grade) > 3) {
+            $grade = 999;
+        }
+
+        return str_pad($grade, 3, "0", STR_PAD_LEFT);
+    }
+
     public function votes()
     {
         return $this->morphMany(Vote::class, 'votable');

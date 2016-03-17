@@ -60,6 +60,7 @@ class QController extends Controller
     public function get_list()
     {
         $qs = Question::with('viewCounts')
+            ->with('votes')
             ->with('comments.writer')
             ->with('writer.socials')
             ->with('answers.writer')
