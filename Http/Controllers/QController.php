@@ -1,10 +1,10 @@
 <?php
 
-namespace ModernPUG\Qna\Http\Controllers;
+namespace NineCells\Qna\Http\Controllers;
 
-use ModernPUG\Qna\Models\Question;
-use ModernPUG\Qna\Models\ViewCount;
-use ModernPUG\Qna\Models\Tag;
+use NineCells\Qna\Models\Question;
+use NineCells\Qna\Models\ViewCount;
+use NineCells\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
 use Auth;

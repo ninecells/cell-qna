@@ -1,6 +1,6 @@
 <?php
 
-namespace ModernPUG\Qna;
+namespace NineCells\Qna;
 
 use App;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -12,11 +12,11 @@ use NineCells\Member\MemberServiceProvider;
 use NineCells\Member\MemberTab;
 use NineCells\Admin\PackageList;
 
-use ModernPUG\Qna\Models\Question;
-use ModernPUG\Qna\Models\Answer;
-use ModernPUG\Qna\Models\Comment;
-use ModernPUG\Qna\Models\Vote;
-use ModernPUG\Qna\Policies\QnaPolicy;
+use NineCells\Qna\Models\Question;
+use NineCells\Qna\Models\Answer;
+use NineCells\Qna\Models\Comment;
+use NineCells\Qna\Models\Vote;
+use NineCells\Qna\Policies\QnaPolicy;
 
 class QnaServiceProvider extends ServiceProvider
 {

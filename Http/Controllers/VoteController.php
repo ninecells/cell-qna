@@ -1,12 +1,12 @@
 <?php
 
-namespace ModernPUG\Qna\Http\Controllers;
+namespace NineCells\Qna\Http\Controllers;
 
 use DB;
-use ModernPUG\Qna\Models\Vote;
-use ModernPUG\Qna\Models\Answer;
-use ModernPUG\Qna\Models\Comment;
-use ModernPUG\Qna\Models\Question;
+use NineCells\Qna\Models\Vote;
+use NineCells\Qna\Models\Answer;
+use NineCells\Qna\Models\Comment;
+use NineCells\Qna\Models\Question;
 
 use Auth;
 use Response;

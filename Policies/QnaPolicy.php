@@ -1,6 +1,6 @@
 <?php
 
-namespace ModernPUG\Qna\Policies;
+namespace NineCells\Qna\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 

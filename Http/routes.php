@@ -2,7 +2,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['namespace' => 'ModernPUG\Qna\Http\Controllers'], function() {
+    Route::group(['namespace' => 'NineCells\Qna\Http\Controllers'], function() {
 
         Route::get('qs/write', 'QController@get_write');
         Route::post('qs/write', 'QController@post_write');
@@ -27,7 +27,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('vote/down', 'VoteController@post_down');
     });
 
-    Route::group(['namespace' => 'ModernPUG\Qna\Http\Controllers'], function() {
+    Route::group(['namespace' => 'NineCells\Qna\Http\Controllers'], function() {
 
         Route::get('members/{member_id}/qna', 'MemberController@GET_member_qna_info')->name('mpug::url.qna.member_qna');
     });

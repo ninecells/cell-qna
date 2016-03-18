@@ -1,6 +1,6 @@
 <?php
 
-namespace ModernPUG\Qna\Models;
+namespace NineCells\Qna\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

@@ -1,8 +1,8 @@
 <?php
 
-namespace ModernPUG\Qna\Http\Controllers;
+namespace NineCells\Qna\Http\Controllers;
 
-use ModernPUG\Qna\Models\Answer;
+use NineCells\Qna\Models\Answer;
 use Illuminate\Http\Request;
 
 use Auth;
