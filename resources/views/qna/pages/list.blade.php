@@ -12,5 +12,5 @@
 <p><a class="btn btn-success" href="/qs/write">질문하기</a></p>
 @endif
 
-@include('mpug::qna.parts.list', ['qs' => $qs])
+@include('ncells::qna.parts.list', ['qs' => $qs])
 @endsection

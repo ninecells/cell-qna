@@ -56,7 +56,7 @@ class MemberController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
 
-        return view('mpug::qna.pages.member_qna', [
+        return view('ncells::qna.pages.member_qna', [
             'member_id' => $member_id,
             'grade_qs' => $grade_qs,
             'grade_as' => $grade_as,

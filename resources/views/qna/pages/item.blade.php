@@ -27,9 +27,9 @@
 <div class="well well-sm">
     <!-- 수정/삭제 버튼 -->
     <h3 style="margin-top: 0px;">{{ $q->title }}</h3>
-    @include('mpug::qna.parts.user_small', ['user' => $q->writer])
+    @include('ncells::qna.parts.user_small', ['user' => $q->writer])
     | <a href="/qs/{{ $q->id }}">{{ $q->created_at->diffForHumans() }}</a>
-    | @include('mpug::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
+    | @include('ncells::qna.parts.vote', ['type' => 'question', 'id' => $q->id, 'count' => $q->votes->sum('grade')])
     | 조회수: {{ $q->viewCounts->count() }}
     | 답변수: {{ $q->answers->count() }}
     @can('qna-edit', $q)
@@ -60,9 +60,9 @@
     <!-- 코멘트 목록 -->
     @foreach($q->comments as $c)
     <hr/>
-    @include('mpug::qna.parts.user_small', ['user' => $c->writer])
+    @include('ncells::qna.parts.user_small', ['user' => $c->writer])
     | {{ $c->created_at->diffForHumans() }}
-    | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+    | @include('ncells::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
     @can('qna-edit', $c)
     | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
     <a href="#" data-href="/comments/{{ $c->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
@@ -108,9 +108,9 @@
     <a name="{{ $a->id }}"></a>
 
     <!-- 수정/삭제 버튼 -->
-    @include('mpug::qna.parts.user_small', ['user' => $a->writer])
+    @include('ncells::qna.parts.user_small', ['user' => $a->writer])
     | <a href="{{ '#'.$a->id }}">{{ $a->created_at->diffForHumans() }}</a>
-    | @include('mpug::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
+    | @include('ncells::qna.parts.vote', ['type' => 'answer', 'id' => $a->id, 'count' => $a->votes->sum('grade')])
     @can('qna-edit', $a)
     | <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
     <a href="#" data-href="/as/{{ $a->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>
@@ -127,9 +127,9 @@
     <!-- 코멘트 목록 -->
     @foreach($a->comments as $c)
     <hr/>
-    @include('mpug::qna.parts.user_small', ['user' => $c->writer])
+    @include('ncells::qna.parts.user_small', ['user' => $c->writer])
     | {{ $c->created_at->diffForHumans() }}
-    | @include('mpug::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
+    | @include('ncells::qna.parts.vote_c', ['type' => 'comment', 'id' => $c->id, 'count' => $c->votes->sum('grade')])
     @can('qna-edit', $c)
     | <a class="btn btn-xs btn-default" href="/comments/{{ $c->id }}/edit">수정</a>
     <a href="#" data-href="/comments/{{ $c->id }}/delete" class="delete btn btn-xs btn-danger">삭제</a>

@@ -15,7 +15,7 @@ class QController extends Controller
     public function get_write()
     {
         $this->authorize('qna-write');
-        return view('mpug::qna.pages.write');
+        return view('ncells::qna.pages.write');
     }
 
     public function post_write(Request $request)
@@ -36,7 +36,7 @@ class QController extends Controller
     {
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
-        return view('mpug::qna.pages.edit_q', ['q' => $q]);
+        return view('ncells::qna.pages.edit_q', ['q' => $q]);
     }
 
     public function put_edit(Request $request, $q_id)
@@ -67,7 +67,7 @@ class QController extends Controller
             ->with('answers.comments.writer')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('mpug::qna.pages.list', ['qs' => $qs]);
+        return view('ncells::qna.pages.list', ['qs' => $qs]);
     }
 
     public function get_tagged_list($tag_id)
@@ -81,7 +81,7 @@ class QController extends Controller
             ->with('answers.comments.writer')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('mpug::qna.pages.list_tagged', ['tag' => $tag, 'qs' => $qs]);
+        return view('ncells::qna.pages.list_tagged', ['tag' => $tag, 'qs' => $qs]);
     }
 
     public function get_item(Request $request, $q_id)
@@ -134,7 +134,7 @@ class QController extends Controller
         config(['og:title' => $q->title]);
         config(['og:description' => $desc]);
 
-        return view('mpug::qna.pages.item', ['q' => $q]);
+        return view('ncells::qna.pages.item', ['q' => $q]);
     }
 
     private function limit_words($words, $limit, $append = ' &hellip;')

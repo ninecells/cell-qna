@@ -34,7 +34,7 @@ class CommentController extends Controller
     {
         $c = Comment::find($c_id);
         $this->authorize('qna-edit', $c);
-        return view('mpug::qna.pages.edit_c', ['c' => $c]);
+        return view('ncells::qna.pages.edit_c', ['c' => $c]);
     }
 
     public function put_edit(Request $request, $c_id)

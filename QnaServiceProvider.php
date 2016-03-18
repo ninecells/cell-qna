@@ -48,14 +48,14 @@ class QnaServiceProvider extends ServiceProvider
             require __DIR__ . '/Http/routes.php';
         }
 
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'mpug');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'ncells');
 
         $this->publishes([
             __DIR__ . '/database/migrations/' => database_path('migrations')
         ], 'migrations');
 
         $tab->addMemberTabItemInfo('qna', 'Q&A', function($member_id) {
-            return route('mpug::url.qna.member_qna', $member_id);
+            return route('ncells::url.qna.member_qna', $member_id);
         });
 
         $packages->addPackageInfo('qna', 'Q&A', function() {

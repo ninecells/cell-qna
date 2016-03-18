@@ -22,7 +22,7 @@ class AController extends Controller
     {
         $a = Answer::find($a_id);
         $this->authorize('qna-edit', $a);
-        return view('mpug::qna.pages.edit_a', ['a' => $a]);
+        return view('ncells::qna.pages.edit_a', ['a' => $a]);
     }
 
     public function put_edit(Request $request, $a_id)

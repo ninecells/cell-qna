@@ -29,6 +29,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['namespace' => 'NineCells\Qna\Http\Controllers'], function() {
 
-        Route::get('members/{member_id}/qna', 'MemberController@GET_member_qna_info')->name('mpug::url.qna.member_qna');
+        Route::get('members/{member_id}/qna', 'MemberController@GET_member_qna_info')->name('ncells::url.qna.member_qna');
     });
 });

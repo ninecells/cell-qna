@@ -16,7 +16,7 @@
                     </ul>
 
                     <h4>질문:</h4>
-                    @include('mpug::qna.parts.list', ['qs' => $qs])
+                    @include('ncells::qna.parts.list', ['qs' => $qs])
                 </div>
             </div>
         </div>
