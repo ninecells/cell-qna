@@ -155,6 +155,7 @@
 @endsection
 
 @section('script')
+@parent
 <script>
     $(function () {
         $('.vote.up').click(function () {
