@@ -8,6 +8,7 @@ use NineCells\Qna\Models\Tag;
 use Illuminate\Http\Request;
 
 use Auth;
+use Gate;
 use Response;
 
 class QController extends Controller
@@ -86,7 +87,13 @@ class QController extends Controller
 
     public function get_item(Request $request, $q_id)
     {
-        $q = Question::with('writer.socials')
+        $query = new Question();
+
+        if (Gate::allows('admin')) {
+            $query = $query->withTrashed();
+        }
+
+        $q = $query->with('writer.socials')
             ->with('tags')
             ->with('viewCounts')
             ->with(['answers' => function ($query) {
