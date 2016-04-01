@@ -6,15 +6,14 @@ use App;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
 use Mews\Purifier\PurifierServiceProvider;
-use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Admin\AdminServiceProvider;
+use NineCells\Admin\PackageList;
+use NineCells\Assets\Twbs3\Twbs3JumboNarrowServiceProvider;
 use NineCells\Member\MemberServiceProvider;
 use NineCells\Member\MemberTab;
-use NineCells\Admin\PackageList;
-
-use NineCells\Qna\Models\Question;
 use NineCells\Qna\Models\Answer;
 use NineCells\Qna\Models\Comment;
+use NineCells\Qna\Models\Question;
 use NineCells\Qna\Models\Vote;
 use NineCells\Qna\Policies\QnaPolicy;
 
@@ -59,7 +58,7 @@ class QnaServiceProvider extends ServiceProvider
         });
 
         $packages->addPackageInfo('qna', 'Q&A', function() {
-            return 'QnaServiceProvider.php를 수정하세요';
+            return '/admin/qna/trashes';
         });
     }
 

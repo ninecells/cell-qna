@@ -16,19 +16,10 @@ class AdminController extends Controller
 
         $packageInfo->setCurrentMenu('qna', [
             [
-                'title' => '질문 보기',
-                'url' => 'admin/qna'
-            ],
-            [
                 'title' => '휴지통',
                 'url' => 'admin/qna/trashes'
             ],
         ]);
-    }
-
-    public function GET_qna_list()
-    {
-        return view('ncells::qna.pages.admin.qna_list');
     }
 
     public function GET_qna_trashes()
